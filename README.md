@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/logo.svg" alt="Turn Detection Model" width="120"/>
+  <img src="docs/readme-assets/logo.png" alt="Turn Detection Model" width="120"/>
 </p>
 
 <h1 align="center">Turn Detection Model</h1>
@@ -19,11 +19,11 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/hero-banner.svg" alt="Whisper Tiny dual-scale turn detection banner" width="100%"/>
+  <img src="docs/readme-assets/hero_banner.png" alt="Whisper Tiny dual-scale turn detection banner" width="100%"/>
 </p>
 
 <p align="center">
-  <img src="docs/assets/metrics-strip.svg" alt="Key metrics: F1, false cutoff, AUROC, latency, model size" width="100%"/>
+  <img src="docs/readme-assets/metrics_strip.png" alt="Key metrics: F1, false cutoff, AUROC, latency, model size" width="100%"/>
 </p>
 
 <p align="center">
