@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" role="img" aria-label="F1 baseline comparison chart">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280">
   <defs>
     <linearGradient id="win" x1="0" y1="1" x2="0" y2="0">
       <stop offset="0%" stop-color="#6366f1"/>
@@ -6,7 +7,7 @@
     </linearGradient>
   </defs>
   <rect width="640" height="280" rx="12" fill="#0f172a"/>
-  <text x="320" y="32" text-anchor="middle" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="16" font-weight="600">Held-out F1 @ 5% false-cutoff budget (validation-selected policy)</text>
+  <text x="320" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Segoe UI, sans-serif" font-size="16" font-weight="600">Held-out F1 at 5% false-cutoff budget</text>
   <line x1="80" y1="220" x2="560" y2="220" stroke="#475569"/>
   <line x1="80" y1="60" x2="80" y2="220" stroke="#475569"/>
   <text x="72" y="224" text-anchor="end" fill="#64748b" font-size="11">0</text>
@@ -18,5 +19,5 @@
   <rect x="360" y="52" width="100" height="168" rx="6" fill="url(#win)"/>
   <text x="410" y="42" text-anchor="middle" fill="#22d3ee" font-size="13" font-weight="600">E6 dynamic INT8</text>
   <text x="410" y="238" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="700">0.7399</text>
-  <text x="320" y="268" text-anchor="middle" fill="#34d399" font-size="12">ù +0.3035 F1 ù 95% CI [+0.2884, +0.3182] parent-turn bootstrap</text>
+  <text x="320" y="268" text-anchor="middle" fill="#34d399" font-size="12">+0.3035 F1 vs baseline (95% CI +0.2884 to +0.3182)</text>
 </svg>

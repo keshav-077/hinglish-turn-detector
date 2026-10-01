@@ -57,7 +57,7 @@ Results below are from **21,995** held-out examples. Temperature, probability th
 On the same test rows and under the same validation-selected **5% false-cutoff budget**, Smart Turn v3.2 scored **0.4364** F1. This model scored **0.7399**, a paired improvement of **+0.3035** F1. The 95% parent-turn bootstrap interval was **[+0.2884, +0.3182]**.
 
 <p align="center">
-  <img src="docs/assets/baseline-comparison.svg" alt="Held-out F1 comparison: E6 vs Smart Turn v3.2" width="640"/>
+  <img src="docs/readme-assets/baseline_comparison.png" alt="Held-out F1 comparison: E6 vs Smart Turn v3.2" width="820"/>
 </p>
 
 The baseline comparison uses the same held-out rows and a policy selected under the same validation interruption budget. It is not a comparison of independently tuned test-set thresholds.
@@ -87,6 +87,10 @@ After a lightweight VAD observes a candidate pause, this model scores the **last
 | Test turn-level false-cutoff rate | 4.97% |
 | Mean / p95 endpoint latency | 512.3 / 1,000 ms |
 
+<p align="center">
+  <img src="docs/readme-assets/policy_frontier.png" alt="Endpoint latency versus false-cutoff trade-off" width="900"/>
+</p>
+
 The selected operating point sits just inside the **5%** turn-level false-cutoff budget. The timeout is part of the contract: a low false-cutoff rate is not useful if the system achieves it by waiting several seconds on every turn.
 
 ---
@@ -94,7 +98,7 @@ The selected operating point sits just inside the **5%** turn-level false-cutoff
 ## Architecture
 
 <p align="center">
-  <img src="docs/assets/architecture.svg" alt="Architecture: audio to log-mel, Whisper Tiny encoder, dual-scale pooling, classifier" width="100%"/>
+  <img src="docs/readme-assets/architecture.png" alt="Architecture: audio to log-mel, Whisper Tiny encoder, dual-scale pooling, classifier" width="100%"/>
 </p>
 
 ```mermaid
@@ -191,11 +195,27 @@ Training used weighted binary cross entropy for the turn label (`HOLD` errors we
 
 On CUDA 12.4, E6 completed in **1,048 s** on one NVIDIA L40S. Hard-negative mining took **1,198 s**. See the [technical report](reports/FINAL_REPORT.md) for run chronology and the CPU-fallback lesson that led to the bootstrap CUDA check.
 
+<p align="center">
+  <img src="docs/readme-assets/dataset_construction.png" alt="Training set construction: originals, causal pauses, hard negatives" width="900"/>
+</p>
+
+<p align="center">
+  <img src="docs/readme-assets/training_loss.png" alt="E6 training losses across optimizer steps" width="900"/>
+</p>
+
+<p align="center">
+  <img src="docs/readme-assets/validation_selection.png" alt="Validation F1 and safe-policy latency across checkpoints" width="900"/>
+</p>
+
 ---
 
 ## Evaluation
 
 ### Main slices
+
+<p align="center">
+  <img src="docs/readme-assets/slice_audit.png" alt="F1 and false-cutoff rates by language and filler slices" width="900"/>
+</p>
 
 | Slice | Count | F1 | False-cutoff rate |
 |---|---:|---:|---:|
@@ -210,6 +230,10 @@ The Hindi F1 is higher than the English F1, but Hindi false cutoffs are much wor
 Some important slices contain only one class. F1 is undefined there; the generated report prints `Not available` instead of inventing a value.
 
 ### Robustness
+
+<p align="center">
+  <img src="docs/readme-assets/robustness.png" alt="Robustness under noise, reverb, and channel effects" width="900"/>
+</p>
 
 | Condition | F1 | False-cutoff rate |
 |---|---:|---:|
@@ -228,6 +252,10 @@ Some important slices contain only one class. F1 is undefined there; the generat
 Moderate noise, clipping, gain changes, and μ-law remain usable. Heavy noise and reverb are clear failure modes.
 
 ### Quantization
+
+<p align="center">
+  <img src="docs/readme-assets/runtime_export.png" alt="CPU latency, model size, and quantization comparison" width="900"/>
+</p>
 
 | Export | Size | Max probability delta | Mean delta | Decision |
 |---|---:|---:|---:|---|
@@ -341,7 +369,8 @@ uv run pytest
 
 ```text
 configs/                 data, model, training, policy, and experiment configs
-docs/assets/             README logo, architecture SVGs, and animated banner
+docs/assets/             README logo and banner SVGs (GitHub-safe, no animation)
+docs/readme-assets/      Evaluation and architecture PNG figures for the README
 scripts/                 RunPod bootstrap and end-to-end pipelines
 src/turn_detector/       preparation, model, trainer, inference, export, evaluation
 tests/                   data, sampling, model, calibration, and evaluation tests
