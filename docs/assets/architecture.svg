@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 320" role="img" aria-label="Model architecture diagram">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+    <linearGradient id="box" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#312e81"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="920" height="320" rx="12" fill="#0f172a"/>
+  <text x="460" y="28" text-anchor="middle" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="15" font-weight="600">Dual-scale turn detector (inference graph)</text>
+  <g font-family="system-ui,sans-serif" font-size="12" fill="#e2e8f0">
+    <rect x="24" y="56" width="100" height="52" rx="8" fill="url(#box)" stroke="#6366f1"/>
+    <text x="74" y="78" text-anchor="middle">16 kHz mono</text>
+    <text x="74" y="96" text-anchor="middle">last 8 s</text>
+    <rect x="148" y="56" width="100" height="52" rx="8" fill="url(#box)" stroke="#6366f1"/>
+    <text x="198" y="78" text-anchor="middle">Log-Mel</text>
+    <text x="198" y="96" text-anchor="middle">80 × 800</text>
+    <rect x="272" y="48" width="120" height="68" rx="8" fill="url(#box)" stroke="#22d3ee"/>
+    <text x="332" y="76" text-anchor="middle">Whisper Tiny</text>
+    <text x="332" y="94" text-anchor="middle">encoder</text>
+    <text x="332" y="108" text-anchor="middle" fill="#94a3b8">4 layers · 384-d</text>
+    <rect x="420" y="56" width="110" height="52" rx="8" fill="#1e293b" stroke="#818cf8"/>
+    <text x="475" y="78" text-anchor="middle">Global pool</text>
+    <text x="475" y="96" text-anchor="middle">full turn</text>
+    <rect x="420" y="128" width="110" height="52" rx="8" fill="#1e293b" stroke="#38bdf8"/>
+    <text x="475" y="150" text-anchor="middle">Tail pool</text>
+    <text x="475" y="168" text-anchor="middle">final 1.5 s</text>
+    <rect x="558" y="92" width="90" height="52" rx="8" fill="url(#box)" stroke="#a78bfa"/>
+    <text x="603" y="114" text-anchor="middle">Fusion +</text>
+    <text x="603" y="132" text-anchor="middle">classifier</text>
+    <rect x="676" y="80" width="100" height="44" rx="8" fill="#1e293b" stroke="#22d3ee"/>
+    <text x="726" y="106" text-anchor="middle">p_complete</text>
+    <rect x="796" y="72" width="100" height="60" rx="8" fill="url(#box)" stroke="#34d399"/>
+    <text x="846" y="98" text-anchor="middle">Policy</text>
+    <text x="846" y="116" text-anchor="middle">COMPLETE</text>
+    <text x="846" y="132" text-anchor="middle">/ HOLD</text>
+  </g>
+  <path d="M124 82 H148" stroke="#64748b" marker-end="url(#arrow)"/>
+  <path d="M248 82 H272" stroke="#64748b" marker-end="url(#arrow)"/>
+  <path d="M392 76 H420" stroke="#64748b" marker-end="url(#arrow)"/>
+  <path d="M392 100 H420 475 100" stroke="#64748b" fill="none" marker-end="url(#arrow)"/>
+  <path d="M530 82 H558" stroke="#64748b" marker-end="url(#arrow)"/>
+  <path d="M530 154 H544 544 118 H558" stroke="#64748b" fill="none" marker-end="url(#arrow)"/>
+  <path d="M648 118 H676" stroke="#64748b" marker-end="url(#arrow)"/>
+  <path d="M776 102 H796" stroke="#64748b" marker-end="url(#arrow)"/>
+  <rect x="24" y="220" width="872" height="72" rx="8" fill="#1e293b" opacity="0.5"/>
+  <text x="40" y="248" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">Training-only: auxiliary filler head (mid / end). Exported ONNX: input_features [B,80,800], frame_mask [B,800] ’ p_complete [B,1].</text>
+  <text x="40" y="268" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">Deployed: dynamic INT8 · 10.16 MiB · calibrated threshold 0.38 · temperature 2.5522 · 300 ms silence · 1000 ms timeout.</text>
+</svg>
